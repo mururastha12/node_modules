@@ -26,6 +26,7 @@ declare const makeMessagesSocket: (config: LegacySocketConfig) => {
     sendChatsQuery: (epoch: number) => Promise<string>;
     profilePictureUrl: (jid: string, timeoutMs?: number) => Promise<string>;
     chatRead: (fromMessage: proto.IMessageKey, count: number) => Promise<void>;
+    /** Relay (send) a WAMessage; more advanced functionality to send a built WA Message, you may want to stick with sendMessage() */
     chatModify: (modification: import("../Types").ChatModification, jid: string, chatInfo: Pick<Chat, "mute" | "pin">, timestampNow?: number) => Promise<void | {
         status: number;
     }>;

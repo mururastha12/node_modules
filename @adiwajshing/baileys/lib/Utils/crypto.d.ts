@@ -1,14 +1,16 @@
 /// <reference types="node" />
 import { KeyPair } from '../Types';
+/** prefix version byte to the pub keys, required for some curve crypto functions */
+export declare const generateSignalPubKey: (pubKey: Uint8Array | Buffer) => Uint8Array | Buffer;
 export declare const Curve: {
     generateKeyPair: () => KeyPair;
     sharedKey: (privateKey: Uint8Array, publicKey: Uint8Array) => Buffer;
-    sign: (privateKey: Uint8Array, buf: Uint8Array) => Buffer;
+    sign: (privateKey: Uint8Array, buf: Uint8Array) => any;
     verify: (pubKey: Uint8Array, message: Uint8Array, signature: Uint8Array) => boolean;
 };
-export declare const signedKeyPair: (keyPair: KeyPair, keyId: number) => {
+export declare const signedKeyPair: (identityKeyPair: KeyPair, keyId: number) => {
     keyPair: KeyPair;
-    signature: Buffer;
+    signature: any;
     keyId: number;
 };
 /** decrypt AES 256 CBC; where the IV is prefixed to the buffer */
@@ -19,7 +21,7 @@ export declare function aesEncrypt(buffer: Buffer | Uint8Array, key: Buffer): Bu
 export declare function aesEncrypWithIV(buffer: Buffer, key: Buffer, IV: Buffer): Buffer;
 export declare function hmacSign(buffer: Buffer | Uint8Array, key: Buffer | Uint8Array, variant?: 'sha256' | 'sha512'): Buffer;
 export declare function sha256(buffer: Buffer): Buffer;
-export declare function hkdf(buffer: Uint8Array, expandedLength: number, { info, salt }: {
+export declare function hkdf(buffer: Uint8Array | Buffer, expandedLength: number, info: {
     salt?: Buffer;
     info?: string;
 }): Buffer;

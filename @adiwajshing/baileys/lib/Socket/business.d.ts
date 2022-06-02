@@ -53,7 +53,10 @@ export declare const makeBusinessSocket: (config: SocketConfig) => {
     groupCreate: (subject: string, participants: string[]) => Promise<import("../Types").GroupMetadata>;
     groupLeave: (id: string) => Promise<void>;
     groupUpdateSubject: (jid: string, subject: string) => Promise<void>;
-    groupParticipantsUpdate: (jid: string, participants: string[], action: import("../Types").ParticipantAction) => Promise<string[]>;
+    groupParticipantsUpdate: (jid: string, participants: string[], action: import("../Types").ParticipantAction) => Promise<{
+        status: string | number;
+        jid: string;
+    }[]>;
     groupUpdateDescription: (jid: string, description?: string) => Promise<void>;
     groupInviteCode: (jid: string) => Promise<string>;
     groupRevokeInvite: (jid: string) => Promise<string>;
@@ -73,9 +76,6 @@ export declare const makeBusinessSocket: (config: SocketConfig) => {
     };
     user: import("../Types").Contact;
     emitEventsFromMap: (map: Partial<import("../Types").BaileysEventMap<import("../Types").AuthenticationCreds>>) => void;
-    assertingPreKeys: (range: number, execute: (keys: {
-        [_: number]: any;
-    }) => Promise<void>) => Promise<void>;
     generateMessageTag: () => string;
     query: (node: import("../WABinary").BinaryNode, timeoutMs?: number) => Promise<import("../WABinary").BinaryNode>;
     waitForMessage: (msgId: string, timeoutMs?: number) => Promise<any>;

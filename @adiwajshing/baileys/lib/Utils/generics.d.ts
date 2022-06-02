@@ -1,7 +1,8 @@
 /// <reference types="node" />
 import { Logger } from 'pino';
 import { proto } from '../../WAProto';
-import { CommonBaileysEventEmitter, ConnectionState, WAVersion } from '../Types';
+import { CommonBaileysEventEmitter, ConnectionState, WACallUpdateType, WAVersion } from '../Types';
+import { BinaryNode } from '../WABinary';
 export declare const Browsers: {
     ubuntu: (browser: any) => [string, string, string];
     macOS: (browser: any) => [string, string, string];
@@ -13,11 +14,10 @@ export declare const BufferJSON: {
     replacer: (k: any, value: any) => any;
     reviver: (_: any, value: any) => any;
 };
-export declare const writeRandomPadMax16: (e: any) => any;
+export declare const writeRandomPadMax16: (msg: Uint8Array) => Buffer;
 export declare const unpadRandomMax16: (e: Uint8Array | Buffer) => Uint8Array;
 export declare const encodeWAMessage: (message: proto.IMessage) => Buffer;
 export declare const generateRegistrationId: () => number;
-export declare const encodeInt: (e: number, t: number) => Uint8Array;
 export declare const encodeBigEndian: (e: number, t?: number) => Uint8Array;
 export declare const toNumber: (t: Long | number) => any;
 export declare function shallowChanges<T>(old: T, current: T, { lookForDeletedKeys }: {
@@ -54,4 +54,19 @@ export declare const fetchLatestBaileysVersion: () => Promise<{
     isLatest: boolean;
     error: any;
 }>;
+/** unique message tag prefix for MD clients */
+export declare const generateMdTagPrefix: () => string;
+/**
+ * Given a type of receipt, returns what the new status of the message should be
+ * @param type type from receipt
+ */
 export declare const getStatusFromReceiptType: (type: string | undefined) => proto.WebMessageInfo.WebMessageInfoStatus;
+/**
+ * Stream errors generally provide a reason, map that to a baileys DisconnectReason
+ * @param reason the string reason given, eg. "conflict"
+ */
+export declare const getErrorCodeFromStreamError: (node: BinaryNode) => {
+    reason: string;
+    statusCode: number;
+};
+export declare const getCallStatusFromNode: ({ tag, attrs }: BinaryNode) => WACallUpdateType;

@@ -1,30 +1,57 @@
 {
-  "author": "Igor Bezkrovny",
-  "name": "image-q",
-  "version": "1.1.1",
-  "description": "Image Quantization Library in **TypeScript** *(MIT Licensed)*",
-  "license": "MIT",
+  "_args": [
+    [
+      "image-q@4.0.0",
+      "C:\\bot1"
+    ]
+  ],
+  "_from": "image-q@4.0.0",
+  "_id": "image-q@4.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-PfJGVgIfKQJuq3s0tTDOKtztksibuUEbJQIYT3by6wctQo+Rdlh7ef4evJ5NCdxY4CfMbvFkocEwbl4BF8RlJw==",
+  "_location": "/image-q",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "image-q@4.0.0",
+    "name": "image-q",
+    "escapedName": "image-q",
+    "rawSpec": "4.0.0",
+    "saveSpec": null,
+    "fetchSpec": "4.0.0"
+  },
+  "_requiredBy": [
+    "/gifwrap"
+  ],
+  "_resolved": "https://registry.npmjs.org/image-q/-/image-q-4.0.0.tgz",
+  "_spec": "4.0.0",
+  "_where": "C:\\bot1",
+  "bugs": {
+    "url": "https://github.com/ibezkrovnyi/image-quantization/issues"
+  },
   "contributors": [],
-  "homepage": "https://github.com/igor-bezkrovny/image-quantization",
-  "scripts": {
-    "test": "mocha --recursive",
-    "prepublish": "npm run dist",
-    "dist": "webpack --config ./src/webpack.config.js",
-    "watch": "webpack --config ./src/webpack.config.js --watch"
+  "dependencies": {
+    "@types/node": "16.9.1"
   },
-  "preferGlobal": false,
-  "main": "./dist/iq.js",
-  "typings": "./dist/iq.d.ts",
-  "dependencies": {},
+  "description": "Image Quantization Library in **TypeScript** *(MIT Licensed)*",
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.0.2",
-    "source-map-loader": "^0.1.5",
-    "ts-loader": "^0.8.2",
-    "typedoc": "^0.4.4",
-    "typescript": "^2.0.0",
-    "webpack": "^1.13.1"
+    "@types/pngjs": "3.3.0",
+    "gh-pages": "3.2.3",
+    "pngjs": "3.3.3",
+    "typedoc": "0.22.10"
   },
+  "exports": {
+    "types": "./dist/types/src/index.d.ts",
+    "import": "./dist/esm/image-q.mjs",
+    "require": "./dist/cjs/image-q.cjs",
+    "default": "./dist/esm/image-q.mjs"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "homepage": "https://github.com/ibezkrovnyi/image-quantization/tree/main/packages/image-q",
   "keywords": [
     "image",
     "palette",
@@ -39,14 +66,24 @@
     "dithering",
     "floyd-steinberg"
   ],
-  "engines": {
-    "node": ">=0.9.0"
-  },
+  "license": "MIT",
+  "main": "./dist/cjs/image-q.cjs",
+  "module": "./dist/esm/image-q.mjs",
+  "name": "image-q",
+  "preferGlobal": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/igor-bezkrovny/image-quantization"
+    "url": "git+https://github.com/ibezkrovnyi/image-quantization.git"
   },
-  "bugs": {
-    "url": "https://github.com/igor-bezkrovny/image-quantization/issues"
-  }
+  "scripts": {
+    "build": "pnpm compile:types && pnpm compile:esm && pnpm compile:cjs && shx cp ../../README.md ./",
+    "clean": "shx rm -rf ./node_modules/.cache",
+    "compile:cjs": "esbuild src/index.ts --outfile=dist/cjs/image-q.cjs --tsconfig=tsconfig.compile.json --format=cjs --platform=node --sourcemap --target=es2020,chrome58,node12 --bundle",
+    "compile:esm": "esbuild src/index.ts --outfile=dist/esm/image-q.mjs --tsconfig=tsconfig.compile.json --format=esm --platform=neutral --sourcemap --target=es2020,chrome58,node12 --bundle",
+    "compile:types": "tsc -p tsconfig.compile.json",
+    "gh-pages": "shx rm -rf ./docs && typedoc && gh-pages -d docs",
+    "test": "jest"
+  },
+  "types": "./dist/types/src/index.d.ts",
+  "version": "4.0.0"
 }

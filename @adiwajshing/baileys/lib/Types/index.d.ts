@@ -8,17 +8,23 @@ export * from './Legacy';
 export * from './Socket';
 export * from './Events';
 export * from './Product';
+export * from './Call';
 import type NodeCache from 'node-cache';
 import { proto } from '../../WAProto';
 import { AuthenticationState } from './Auth';
 import { CommonSocketConfig } from './Socket';
+export declare type MessageRetryMap = {
+    [msgId: string]: number;
+};
 export declare type SocketConfig = CommonSocketConfig<AuthenticationState> & {
     /** provide a cache to store a user's device list */
     userDevicesCache?: NodeCache;
-    /** map to store the retry counts for failed messages */
-    msgRetryCounterMap?: {
-        [msgId: string]: number;
-    };
+    /**
+     * map to store the retry counts for failed messages;
+     * used to determine whether to retry a message or not */
+    msgRetryCounterMap?: MessageRetryMap;
+    /** width for link preview images */
+    linkPreviewImageThumbnailWidth: number;
     /**
      * fetch a message from your store
      * implement this so that messages failed to send (solves the "this message can take a while" issue) can be retried
@@ -32,7 +38,7 @@ export declare enum DisconnectReason {
     timedOut = 408,
     loggedOut = 401,
     badSession = 500,
-    restartRequired = 410,
+    restartRequired = 515,
     multideviceMismatch = 411
 }
 export declare type WAInitResponse = {

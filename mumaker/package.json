@@ -1,20 +1,43 @@
 {
-  "name": "mumaker",
-  "version": "1.0.0",
-  "description": "Unofficial API Wrapper for Textpro, Photooxy and Instagram Post.",
-  "main": "src/index.js",
-  "directories": {
-    "lib": "lib"
+  "_args": [
+    [
+      "mumaker@1.0.0",
+      "C:\\bot1"
+    ]
+  ],
+  "_from": "mumaker@1.0.0",
+  "_id": "mumaker@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-gAswNAHTCjce7krJB1b69JkGW4XKfN0TTf+gUi2uGiuu2BhHeOph6oMirxxmrpsNDuJdKa2jFLD8pMR+b/mZMQ==",
+  "_location": "/mumaker",
+  "_phantomChildren": {
+    "boolbase": "1.0.0",
+    "css-what": "6.1.0",
+    "domelementtype": "2.3.0",
+    "follow-redirects": "1.14.9",
+    "nth-check": "2.0.1",
+    "tslib": "2.4.0"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "mumaker@1.0.0",
+    "name": "mumaker",
+    "escapedName": "mumaker",
+    "rawSpec": "1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "1.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mumaker/mumaker.git"
-  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/mumaker/-/mumaker-1.0.0.tgz",
+  "_spec": "1.0.0",
+  "_where": "C:\\bot1",
   "author": "",
-  "license": "GNU",
+  "bugs": {
+    "url": "https://github.com/mumaker/mumaker/issues"
+  },
   "dependencies": {
     "axios": "^0.24.0",
     "cheerio": "^1.0.0-rc.10",
@@ -23,9 +46,21 @@
     "node-fetch": "^2.6.1",
     "qs": "^6.10.2"
   },
+  "description": "Unofficial API Wrapper for Textpro, Photooxy and Instagram Post.",
   "devDependencies": {},
-  "bugs": {
-    "url": "https://github.com/mumaker/mumaker/issues"
+  "directories": {
+    "lib": "lib"
   },
-  "homepage": "https://github.com/mumaker/mumaker#readme"
+  "homepage": "https://github.com/mumaker/mumaker#readme",
+  "license": "GNU",
+  "main": "src/index.js",
+  "name": "mumaker",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mumaker/mumaker.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
 }

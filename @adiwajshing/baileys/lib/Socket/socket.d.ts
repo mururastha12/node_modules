@@ -18,14 +18,11 @@ export declare const makeSocket: ({ waWebSocketUrl, connectTimeoutMs, logger, ag
     };
     readonly user: import("../Types").Contact;
     emitEventsFromMap: (map: Partial<BaileysEventMap<AuthenticationCreds>>) => void;
-    assertingPreKeys: (range: number, execute: (keys: {
-        [_: number]: any;
-    }) => Promise<void>) => Promise<void>;
     generateMessageTag: () => string;
     query: (node: BinaryNode, timeoutMs?: number) => Promise<BinaryNode>;
     waitForMessage: (msgId: string, timeoutMs?: number) => Promise<any>;
     waitForSocketOpen: () => Promise<void>;
-    sendRawMessage: (data: Buffer | Uint8Array) => Promise<void>;
+    sendRawMessage: (data: Uint8Array | Buffer) => Promise<void>;
     sendNode: (frame: BinaryNode) => Promise<void>;
     logout: () => Promise<void>;
     end: (error: Error | undefined) => void;

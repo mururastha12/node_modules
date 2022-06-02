@@ -3,15 +3,11 @@ import { AxiosRequestConfig } from 'axios';
 import type { Logger } from 'pino';
 import { Readable, Transform } from 'stream';
 import { URL } from 'url';
-import { CommonSocketConfig, DownloadableMessage, MediaConnInfo, MediaType, WAMediaUpload, WAMediaUploadFunction, WAMessageContent } from '../Types';
+import { CommonSocketConfig, DownloadableMessage, MediaConnInfo, MediaDecryptionKeyInfo, MediaType, WAMediaUpload, WAMediaUploadFunction, WAMessageContent } from '../Types';
 export declare const hkdfInfoKey: (type: MediaType) => string;
 /** generates all the keys required to encrypt/decrypt & sign a media message */
-export declare function getMediaKeys(buffer: any, mediaType: MediaType): {
-    iv: Buffer;
-    cipherKey: Buffer;
-    macKey: Buffer;
-};
-export declare const extractImageThumb: (bufferOrFilePath: Readable | Buffer | string) => Promise<Buffer>;
+export declare function getMediaKeys(buffer: Uint8Array | string, mediaType: MediaType): MediaDecryptionKeyInfo;
+export declare const extractImageThumb: (bufferOrFilePath: Readable | Buffer | string, width?: number) => Promise<Buffer>;
 export declare const generateProfilePicture: (mediaUpload: WAMediaUpload) => Promise<{
     img: Buffer;
 }>;
@@ -45,6 +41,11 @@ export declare type MediaDownloadOptions = {
     startByte?: number;
     endByte?: number;
 };
-export declare const downloadContentFromMessage: ({ mediaKey, directPath, url }: DownloadableMessage, type: MediaType, { startByte, endByte }?: MediaDownloadOptions) => Promise<Transform>;
+export declare const downloadContentFromMessage: ({ mediaKey, directPath, url }: DownloadableMessage, type: MediaType, opts?: MediaDownloadOptions) => Promise<Transform>;
+/**
+ * Decrypts and downloads an AES256-CBC encrypted file given the keys.
+ * Assumes the SHA256 of the plaintext is appended to the end of the ciphertext
+ * */
+export declare const downloadEncryptedContent: (downloadUrl: string, { cipherKey, iv }: MediaDecryptionKeyInfo, { startByte, endByte }?: MediaDownloadOptions) => Promise<Transform>;
 export declare function extensionForMediaMessage(message: WAMessageContent): string;
 export declare const getWAUploadToServer: ({ customUploadHosts, fetchAgent, logger }: CommonSocketConfig<any>, refreshMediaConn: (force: boolean) => Promise<MediaConnInfo>) => WAMediaUploadFunction;

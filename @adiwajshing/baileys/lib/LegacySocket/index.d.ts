@@ -19,7 +19,10 @@ declare const makeLegacySocket: (config: Partial<LegacySocketConfig>) => {
     groupUpdateDescription: (jid: string, description: string) => Promise<{
         status: number;
     }>;
-    groupParticipantsUpdate: (id: string, participants: string[], action: import("../Types").ParticipantAction) => Promise<string[]>;
+    groupParticipantsUpdate: (id: string, participants: string[], action: import("../Types").ParticipantAction) => Promise<{
+        jid: string;
+        status: any;
+    }[]>;
     getBroadcastListInfo: (jid: string) => Promise<import("../Types").GroupMetadata>;
     groupInviteCode: (jid: string) => Promise<string>;
     relayMessage: (message: import("../Types").WAProto.IWebMessageInfo, { waitForAck }?: {
@@ -28,7 +31,7 @@ declare const makeLegacySocket: (config: Partial<LegacySocketConfig>) => {
     waUploadToServer: import("../Types").WAMediaUploadFunction;
     generateUrlInfo: (text: string) => Promise<import("../Types").WAUrlInfo>;
     messageInfo: (jid: string, messageID: string) => Promise<import("../Types").WAProto.IUserReceipt[]>;
-    downloadMediaMessage: (message: import("../Types").WAProto.IWebMessageInfo, type?: "stream" | "buffer", options?: import("..").MediaDownloadOptions) => Promise<Buffer | import("stream").Transform>;
+    downloadMediaMessage: (message: import("../Types").WAProto.IWebMessageInfo, type?: "buffer" | "stream", options?: import("..").MediaDownloadOptions) => Promise<Buffer | import("stream").Transform>;
     updateMediaMessage: (message: import("../Types").WAProto.IWebMessageInfo) => Promise<import("..").BinaryNode>;
     fetchMessagesFromWA: (jid: string, count: number, cursor?: import("../Types").WAMessageCursor) => Promise<import("../Types").WAProto.WebMessageInfo[]>;
     loadMessageFromWA: (jid: string, id: string) => Promise<import("../Types").WAProto.WebMessageInfo>;

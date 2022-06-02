@@ -101,6 +101,7 @@ export declare type AnyMediaMessageContent = (({
 };
 export declare type AnyRegularMessageContent = (({
     text: string;
+    linkPreview?: WAUrlInfo;
 } & Mentionable & Buttonable & Templatable & Listable) | AnyMediaMessageContent | {
     contacts: {
         displayName?: string;
@@ -175,4 +176,9 @@ export declare type WAMessageCursor = {
 export declare type MessageUserReceiptUpdate = {
     key: proto.IMessageKey;
     receipt: MessageUserReceipt;
+};
+export declare type MediaDecryptionKeyInfo = {
+    iv: Buffer;
+    cipherKey: Buffer;
+    macKey?: Buffer;
 };

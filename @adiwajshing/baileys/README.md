@@ -226,6 +226,8 @@ export type BaileysEventMap = {
 
     'blocklist.set': { blocklist: string[] }
     'blocklist.update': { blocklist: string[], type: 'add' | 'remove' }
+    /** Receive an update on a call, including when the call was received, rejected, accepted */
+    'call': WACallEvent[]
 }
 ```
 
@@ -413,6 +415,17 @@ const reactionMessage = {
 const sendMsg = await sock.sendMessage(id, reactionMessage)
 ```
 
+### Sending messages with link previews
+
+1. By default, WA MD does not seem to have link generation when sent from the web
+2. Baileys has an extra function to help generate the content for these link previews
+3. To enable this function's usage, add `link-preview-js` as a dependency to your project with `yarn add link-preview-js`
+4. Send a link:
+``` ts
+// send a link
+const sentMsg  = await sock.sendMessage(id, { text: 'Hi, this was sent using https://github.com/adiwajshing/baileys' })
+```
+
 ### Media Messages
 
 Sending media (video, stickers, images) is easier & more efficient than ever. 
@@ -457,7 +470,7 @@ const buttons = [
 const buttonMessage = {
     image: {url: 'https://example.com/image.jpeg'},
     caption: "Hi it's button message",
-    footerText: 'Hello World',
+    footer: 'Hello World',
     buttons: buttons,
     headerType: 4
 }

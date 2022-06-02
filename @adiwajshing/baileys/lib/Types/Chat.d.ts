@@ -29,10 +29,10 @@ export declare type Chat = Omit<proto.IConversation, 'messages'> & {
     archive?: boolean;
 };
 /**
- * the last messages in a chat, sorted reverse-chronologically
- * for MD modifications, the last message in the array must be the last message recv in the chat
+ * the last messages in a chat, sorted reverse-chronologically. That is, the latest message should be first in the chat
+ * for MD modifications, the last message in the array (i.e. the earlist message) must be the last message recv in the chat
  * */
-export declare type LastMessageList = Pick<proto.IWebMessageInfo, 'key' | 'messageTimestamp'>[];
+export declare type LastMessageList = Pick<proto.IWebMessageInfo, 'key' | 'messageTimestamp'>[] | proto.ISyncActionMessageRange;
 export declare type ChatModification = {
     archive: boolean;
     lastMessages: LastMessageList;

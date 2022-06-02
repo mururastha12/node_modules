@@ -71,6 +71,7 @@ declare const makeChatsSocket: (config: LegacySocketConfig) => {
     canLogin: () => boolean;
     logout: () => Promise<void>;
     waitForConnectionUpdate: (check: (u: Partial<import("../Types").ConnectionState>) => boolean, timeoutMs?: number) => Promise<void>;
+    /** Updates business profile. */
     type: "legacy";
     ws: import("ws");
     sendAdminTest: () => Promise<string>;
@@ -92,11 +93,7 @@ declare const makeChatsSocket: (config: LegacySocketConfig) => {
     setQuery: (nodes: BinaryNode[], binaryTag?: import("../Types").WATag, tag?: string) => Promise<{
         status: number;
     }>;
-    currentEpoch: () => number; /**
-     * Update the profile picture
-     * @param jid
-     * @param img
-     */
+    currentEpoch: () => number;
     end: (error: Error) => void;
 };
 export default makeChatsSocket;

@@ -34,7 +34,10 @@ declare const makeGroupsSocket: (config: LegacySocketConfig) => {
      * @param jid the ID of the group
      * @param participants the people to add
      */
-    groupParticipantsUpdate: (id: string, participants: string[], action: ParticipantAction) => Promise<string[]>;
+    groupParticipantsUpdate: (id: string, participants: string[], action: ParticipantAction) => Promise<{
+        jid: string;
+        status: any;
+    }[]>;
     /** Query broadcast list info */
     getBroadcastListInfo: (jid: string) => Promise<GroupMetadata>;
     groupInviteCode: (jid: string) => Promise<string>;
@@ -44,7 +47,7 @@ declare const makeGroupsSocket: (config: LegacySocketConfig) => {
     waUploadToServer: import("../Types").WAMediaUploadFunction;
     generateUrlInfo: (text: string) => Promise<import("../Types").WAUrlInfo>;
     messageInfo: (jid: string, messageID: string) => Promise<import("../Types").WAProto.IUserReceipt[]>;
-    downloadMediaMessage: (message: import("../Types").WAProto.IWebMessageInfo, type?: "stream" | "buffer", options?: import("..").MediaDownloadOptions) => Promise<Buffer | import("stream").Transform>;
+    downloadMediaMessage: (message: import("../Types").WAProto.IWebMessageInfo, type?: "buffer" | "stream", options?: import("..").MediaDownloadOptions) => Promise<Buffer | import("stream").Transform>;
     updateMediaMessage: (message: import("../Types").WAProto.IWebMessageInfo) => Promise<BinaryNode>;
     fetchMessagesFromWA: (jid: string, count: number, cursor?: import("../Types").WAMessageCursor) => Promise<import("../Types").WAProto.WebMessageInfo[]>;
     loadMessageFromWA: (jid: string, id: string) => Promise<import("../Types").WAProto.WebMessageInfo>;
